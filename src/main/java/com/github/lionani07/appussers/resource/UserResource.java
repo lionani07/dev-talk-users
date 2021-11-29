@@ -30,9 +30,6 @@ public class UserResource {
     @GetMapping("/{id}")
     public ResponseEntity<User> find(@PathVariable final Long id) {
         final var userFound = this.userService.find(id);
-
-        //TODO FIND VIDEOS ASYNC
-
         return ResponseEntity.ok(userFound);
     }
 }
