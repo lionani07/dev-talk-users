@@ -1,0 +1,58 @@
+server:
+  port: 8080
+
+# datasource
+spring:
+  application:
+    name: app-ussers
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+# jpa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dll-auto: update
+
+# h2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# clients
+client:
+  videos:
+  url: http://localhost:8081/videos
+
+# cloud
+cloud:
+  aws:
+    proxy:
+      host: localhost
+      port: 4566
+    stack:
+      auto: false
+    region:
+      static: us-east-1
+      auto: false
+    credentials:
+      access-key: AKIA5CHKNZZIKSJ6WMWD
+      secret-key: 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
+    sqs:
+      pool:
+        core-size: 10
+        wait-timeout: 20
+        thread-name-prefix: ${spring.application.name}-sqs-thread-pool
+      queues:
+        prefix:
+          us-east-1:
+            http://localhost:4566/000000000000/
+        delete_video_queue:
+          name: ${cloud.aws.sqs.queues.prefix.us-east-1}delete_video_queue

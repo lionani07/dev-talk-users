@@ -32,5 +32,10 @@ public class UserResource {
         final var userFound = this.userService.find(id);
         return ResponseEntity.ok(userFound);
     }
+
+    @DeleteMapping("/videos/{id}")
+    public void deleteVideo(@PathVariable("id") Long videoId) {
+        this.userService.deleteVideo(videoId);
+    }
 }
 
