@@ -2,6 +2,6 @@
 set -x
 
 # Create queue SQS
-awslocal sqs create-queue --queue-name delete_video_queue
+awslocal sqs create-queue --queue-name create_video_queue
 
 set +x

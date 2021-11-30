@@ -1,6 +1,6 @@
 package com.github.lionani07.appussers.service;
 
-import com.github.lionani07.appussers.amazon_sqs_request.VideoDeleteRequest;
+import com.github.lionani07.appussers.amazon_sqs_request.VideoCreationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class AmazonSQSService {
 
-    @Value("${cloud.aws.sqs.queues.delete_video_queue.name}")
-    private String deleteVideoQueue;
+    @Value("${cloud.aws.sqs.queues.create_video_queue.name}")
+    private String createVideoQueue;
 
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
-    void notify(VideoDeleteRequest videoDeleteRequest) {
-        this.queueMessagingTemplate.convertAndSend(this.deleteVideoQueue, videoDeleteRequest);
+    void notify(final VideoCreationRequest videoCreationRequest) {
+        this.queueMessagingTemplate.convertAndSend(this.createVideoQueue, videoCreationRequest);
     }
 
 }

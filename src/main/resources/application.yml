@@ -54,8 +54,8 @@ cloud:
         prefix:
           us-east-1:
             http://localhost:4566/000000000000/
-        delete_video_queue:
-          name: ${cloud.aws.sqs.queues.prefix.us-east-1}delete_video_queue
+        create_video_queue:
+          name: ${cloud.aws.sqs.queues.prefix.us-east-1}create_video_queue
 
 logging:
   level:

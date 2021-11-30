@@ -1,5 +1,6 @@
 package com.github.lionani07.appussers.resource;
 
+import com.github.lionani07.appussers.client.request.VideoRequest;
 import com.github.lionani07.appussers.model.User;
 import com.github.lionani07.appussers.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,15 +28,16 @@ public class UserResource {
         return ResponseEntity.created(location).body(userCreated);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> find(@PathVariable final Long id) {
-        final var userFound = this.userService.find(id);
-        return ResponseEntity.ok(userFound);
+    @PostMapping("/{userId}/videos")
+    public ResponseEntity<String> createVideo(@PathVariable Long userId, @RequestBody VideoRequest videoRequest) {
+        this.userService.createVideo(userId, videoRequest);
+        return ResponseEntity.ok(String.format("Recebemos seu video %s e estamos procesando.", videoRequest.getName()));
     }
 
-    @DeleteMapping("/videos/{id}")
-    public void deleteVideo(@PathVariable("id") Long videoId) {
-        this.userService.deleteVideo(videoId);
+    @GetMapping("/{id}")
+    public ResponseEntity<User> find(@PathVariable final Long id) {
+        return ResponseEntity.ok(this.userService.find(id));
     }
+
 }
 

@@ -1,8 +1,9 @@
 package com.github.lionani07.appussers.service;
 
-import com.github.lionani07.appussers.amazon_sqs_request.VideoDeleteRequest;
+import com.github.lionani07.appussers.amazon_sqs_request.VideoCreationRequest;
 import com.github.lionani07.appussers.client.VideoClient;
-import com.github.lionani07.appussers.client.VideoResponse;
+import com.github.lionani07.appussers.client.request.VideoRequest;
+import com.github.lionani07.appussers.client.response.VideoResponse;
 import com.github.lionani07.appussers.model.User;
 import com.github.lionani07.appussers.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +21,15 @@ public class UserService {
 
     private final AmazonSQSService amazonSQSService;
 
-    public User save(User user) {
+    public User save(final User user) {
         return this.userRepository.save(user);
     }
 
-    public User find(Long id) {
+    public void createVideo(final Long userId, final VideoRequest videoRequest) {
+        this.amazonSQSService.notify(VideoCreationRequest.of(userId, videoRequest));
+    }
+
+    public User find(final Long id) {
         final var userFound = this.userRepository
                 .findById(id)
                 .orElseThrow(() -> new EmptyResultDataAccessException(1));
@@ -34,7 +39,4 @@ public class UserService {
         return userFound;
     }
 
-    public void deleteVideo(Long videoId) {
-        this.amazonSQSService.notify(new VideoDeleteRequest(videoId));
-    }
 }

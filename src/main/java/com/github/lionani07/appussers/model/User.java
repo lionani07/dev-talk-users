@@ -1,6 +1,6 @@
 package com.github.lionani07.appussers.model;
 
-import com.github.lionani07.appussers.client.VideoResponse;
+import com.github.lionani07.appussers.client.response.VideoResponse;
 import lombok.Data;
 
 import javax.persistence.*;
