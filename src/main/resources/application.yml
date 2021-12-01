@@ -43,8 +43,8 @@ cloud:
       static: us-east-1
       auto: false
     credentials:
-      access-key: AKIA5CHKNZZIKSJ6WMWD
-      secret-key: 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
+      access-key: access-key
+      secret-key: secret-key
     sqs:
       pool:
         core-size: 10

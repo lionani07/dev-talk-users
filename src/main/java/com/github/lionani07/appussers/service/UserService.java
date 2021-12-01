@@ -1,15 +1,16 @@
 package com.github.lionani07.appussers.service;
 
 import com.github.lionani07.appussers.amazon_sqs_request.VideoCreationRequest;
-import com.github.lionani07.appussers.client.VideoClient;
 import com.github.lionani07.appussers.client.request.VideoRequest;
 import com.github.lionani07.appussers.client.response.VideoResponse;
+import com.github.lionani07.appussers.client.response.VideosClient;
 import com.github.lionani07.appussers.model.User;
 import com.github.lionani07.appussers.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final VideoClient videoClient;
+    private final VideosClient videosClient;
 
     private final AmazonSQSService amazonSQSService;
 
@@ -34,8 +35,9 @@ public class UserService {
                 .findById(id)
                 .orElseThrow(() -> new EmptyResultDataAccessException(1));
 
-        final Flux<VideoResponse> videosOfUser = this.videoClient.findVideosByUser(id);
-        userFound.setVideos(videosOfUser.collectList().block());
+        final List<VideoResponse> videos = this.videosClient.getVideos(id);
+        userFound.setVideos(videos);
+
         return userFound;
     }
 
