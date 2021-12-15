@@ -4,6 +4,7 @@ import com.github.lionani07.appussers.amazon_sqs_request.VideoCreationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,10 @@ public class AmazonSQSService {
 
     void notify(final VideoCreationRequest videoCreationRequest) {
         this.queueMessagingTemplate.convertAndSend(this.createVideoQueue, videoCreationRequest);
+    }
+
+    public Message<?> getMessages() {
+        return this.queueMessagingTemplate.receive(createVideoQueue);
     }
 
 }
