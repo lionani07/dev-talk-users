@@ -3,7 +3,7 @@ package com.github.lionani07.appussers.service;
 import com.github.lionani07.appussers.amazon_sqs_request.VideoCreationRequest;
 import com.github.lionani07.appussers.client.request.VideoRequest;
 import com.github.lionani07.appussers.client.response.VideoResponse;
-import com.github.lionani07.appussers.client.response.VideosClient;
+import com.github.lionani07.appussers.client.VideosClient;
 import com.github.lionani07.appussers.model.User;
 import com.github.lionani07.appussers.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

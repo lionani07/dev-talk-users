@@ -1,5 +1,6 @@
-package com.github.lionani07.appussers.client.response;
+package com.github.lionani07.appussers.client;
 
+import com.github.lionani07.appussers.client.response.VideoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
