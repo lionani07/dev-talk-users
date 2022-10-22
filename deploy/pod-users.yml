@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-users
+  labels:
+    app: app-users
+spec:
+  containers:
+    - name: pod-users
+      image:  lionani07/lio:app-users.2.0
+      ports:
+        - containerPort: 8080
